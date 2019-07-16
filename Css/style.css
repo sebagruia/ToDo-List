@@ -1,0 +1,56 @@
+*{
+   box-sizing: border-box;
+}
+
+body{
+    font-family: 'Cabin', sans-serif;
+    margin:0;
+    padding:0;
+   
+}
+
+.todo-input{
+    
+    background-color: #636e72;
+    height:100vh;
+    text-align:center;
+    border-right:2px solid #000;
+    
+}
+.form{
+    position:fixed;
+    top:10px;
+     width:100%;
+}
+
+.form button{
+    margin-top:0;
+}
+
+
+.form-control{
+    display:inline-block;
+    width:50%;
+}
+
+.btn-light {
+    margin-bottom: 5px;
+}
+
+.list-wraper{
+    background-color: #fff;
+    color:#000;
+    margin:0 auto;
+    margin-top:10%;
+    width:50vw;
+    height:auto;
+}
+
+.todo-list{
+    margin-top: 2vh;
+    text-align:left;
+}
+.todo-list li{
+    color: #495057;
+    list-style:none;
+}
