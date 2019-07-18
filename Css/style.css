@@ -30,7 +30,7 @@ body{
 
 .form-control{
     display:inline-block;
-    width:50%;
+    width: 30%;
 }
 
 .btn-light {
@@ -42,7 +42,7 @@ body{
     color:#000;
     margin:0 auto;
     margin-top:10%;
-    width:50vw;
+    width: 30vw;
     height:auto;
 }
 
@@ -53,4 +53,39 @@ body{
 .todo-list li{
     color: #495057;
     list-style:none;
+    
 }
+
+.far{
+    cursor:pointer;
+}
+
+.fa-square{
+    padding-right: 5px;
+}
+
+.fa-check-square{
+    padding-right: 5px;
+    
+}
+.hidden{
+    display:none;
+}
+
+.list-content{
+    display:flex;
+    padding-right: 10px;
+}
+
+.edit-list{
+    margin-left:auto;
+}
+.edit-list .far{
+    padding-right:3px;
+}
+
+
+
+
+
+
