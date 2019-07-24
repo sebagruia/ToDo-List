@@ -1,27 +1,106 @@
 * {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 body {
-    font-family: 'Cabin', sans-serif;
+    height: 100vh;
+    font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
     padding: 0;
 
 }
-
-.todo-input {
-
-    background-color: #636e72;
+.modal{
+    left: 25vw;
+}
+.col1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #2b3f5d;
     height: 100vh;
+    width: 100vw;
     text-align: center;
-    border-right: 2px solid #000;
+    -webkit-transition: left 0.5s ease;
+    transition: left 0.5s ease;
+}
+
+.transitionForCol1 {
+    left: -50vw;
 
 }
 
+
+.form-group2-flex{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    width: 23vw;
+    margin: 0 auto
+
+
+}
+
+.newList, .newList2, .newList3 {
+    color: #ffc107;
+    cursor: pointer;
+}
+
+.newList3{
+    margin-left:auto;
+}
+
+.newList h5 {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.newList2 h5{
+    display: inline-block;
+    margin-left: 5px; 
+    margin-top: 10px; 
+}
+
+.newList3 h5{
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 10px; 
+}
+
+.not-visible{
+    visibility: hidden;
+}
+.col2 {
+    /* background-color: #c9a27d;  */
+    background-color: #ccae62;
+    height: 100vh;
+    width: 100vw;
+}
+
 .form {
-    position: fixed;
-    top: 10px;
-    width: 100%;
+    margin-top: 30vh;
+    -webkit-transition: margin-left 0.5 ease;
+    transition: margin-left 0.5 ease;
+}
+
+.formTransition {
+    margin-left: 45%;
+}
+
+.form-group-1{
+    margin:0 auto;
+
+}
+
+.form h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.3rem;
+    color: #fff;
+}
+
+.changedStyle {
+    font-size: 1.5rem;
 }
 
 .form button {
@@ -31,28 +110,67 @@ body {
 
 .form-control {
     display: inline-block;
-    width: 30%;
+    width: 35%;
 }
 
-.btn-light {
-    margin-bottom: 5px;
+.btn-warning {
+    margin-bottom: 3px;
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem;
+    color: #fff;
 }
 
 .list-wraper {
+    position:relative;
     background-color: #fff;
-    color: #000;
+    /* color: #000; */
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 20vh;
     width: 30vw;
-    height: auto;
+    height: 500px;
+    border:0.5px solid #ccae62;
+    border-radius:10px;
 }
 
 .todo-list {
-    margin-top: 2vh;
+    margin-top: 3vh;
     text-align: left;
+    
+}
+    
+ #input-List-title{
+    position:-webkit-sticky;
+    position:sticky;
+    left: 0;
+    top: 0;
+    width: 100%;
+    text-transform: capitalize;
+    margin-bottom: 3vh;
+    border: 1px solid #ccae62;
+     
+}
+
+.changePlaceholderTextColor::-webkit-input-placeholder{
+    color:#fff;
+}
+
+.changePlaceholderTextColor:-ms-input-placeholder{
+    color:#fff;
+}
+
+.changePlaceholderTextColor::-ms-input-placeholder{
+    color:#fff;
+}
+
+.changePlaceholderTextColor::placeholder{
+    color:#fff;
 }
 
 .todo-list li {
+    margin-bottom: 3vh;
     color: #495057;
     list-style: none;
 
@@ -62,22 +180,30 @@ body {
     cursor: pointer;
 }
 
-.fa-square {
+.fa-circle {
     padding-right: 5px;
 }
 
-.fa-check-square {
+.fa-check-circle {
     padding-right: 5px;
 
 }
 
+.quantity{
+    width: 35px;
+    height: 21px;
+}
 .hidden {
     display: none;
 }
 
 .list-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    width: 90%;
     padding-right: 10px;
+    border-bottom: 0.5px solid #d1ccc0;
 }
 
 .check-list p {
@@ -86,13 +212,23 @@ body {
 
 .edit-list {
     margin-left: auto;
+    padding-right: 10px;
 }
 
 .edit-list .far {
     padding-right: 3px;
 }
 
-.inputForModal{
-    width:100%;
+.inputForModal {
+    width: 100%;
 }
 
+/* Bootstrap Classes Edited */
+
+.text-danger{
+    color: #b33939 !important;
+}
+
+.bg-primary{
+    background-color:  #2b3f5d !important;
+}

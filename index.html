@@ -4,8 +4,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,700i,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,600i,700,700i,900&display=swap"
+    rel="stylesheet">
   <!-- Bootstrap link -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,8 +23,8 @@
   <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Window</h5>
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Entry</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -33,8 +34,8 @@
             aria-describedby="edit an existing entry field">
         </div>
         <div class="modal-footer">
-          <button type="button" id="modalCancelButton" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" id="modalSaveButton" class="btn btn-primary">Save</button>
+          <button type="button" id="modalCancelButton" class="btn bg-info text-white" data-dismiss="modal">Close</button>
+          <button type="button" id="modalSaveButton" class="btn bg-warning text-white">Save</button>
         </div>
       </div>
     </div>
@@ -42,18 +43,50 @@
   <!-- Modal -->
 
   <div class="container-fluid">
-    <div class="row">
 
-      <div class="todo-input col">
-        <div class="form ">
-          <input type="text" id="input-new-line" class="form-control shadow" placeholder="Your wish is my command"
-            aria-label="Insert text" aria-describedby="basic-addon">
-          <button type="button" class="btn btn-light">Insert</button>
+    <div class="col1">
+      <div class="form ">
+        <h1><span class="changedStyle">Do things</span> The Right Way</h1>
+        <div class="form-group-1">
+            <input type="text" id="input-new-line" class="form-control shadow hidden " placeholder="Your wish is my command"
+            aria-label="Insert text" aria-describedby="edit an existing entry field">
+          <button type="button" id="insertEntryButton" class="btn btn-warning  hidden">Insert</button>
+          <div class="newList" roll="button">
+            <i class="fas fa-plus"></i>
+            <h5 class="font-weight-light">New List</h5>
+          </div>
 
         </div>
-        <div class="list-wraper ">
-          <ul class="todo-list"></ul>
 
+        
+        
+        <div class="form-group2-flex hidden">
+          <div class="newList2" roll="button">
+            <i class="fas fa-plus"></i>
+            <h5 class="newList2-text font-weight-light">New List</h5>
+          </div>
+          <div class="newList3" roll="button">
+              <h5 class="newList2-text font-weight-light">Delete List</h5>
+            <i class="fas fa-minus"></i>
+          </div>
+        </div>
+        
+
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6 not-visible"></div>
+      <div class="col-sm-6 col2">
+
+        <div class="list-wraper ">
+            <input type="text" id="input-List-title" class="form-control font-italic bg-primary text-white changePlaceholderTextColor hidden" placeholder="Name your list"
+              aria-label="Insert text" aria-describedby="edit an existing entry field">
+          <ul class="todo-list">
+            
+          </ul>
         </div>
 
 
