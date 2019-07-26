@@ -1,4 +1,3 @@
-
 //Global Variables
 const inputNewListEntry = document.getElementById('input-new-line');
 const insertButton = document.querySelector('#insertEntryButton');
@@ -6,16 +5,18 @@ const todoList = document.querySelector('.todo-list');
 const listWraper = document.querySelector('.list-wraper');
 const newList = document.querySelector('.newList');
 const inputListTitle = document.querySelector('#input-List-title');
+const addToDoListButton = document.getElementById('addToDoList');
+const addShoppingListButton = document.getElementById('addShoppingList');
 
 
 // The function that creates the <li> and its HTML content 
 function createList() {
-    
+
     const li = document.createElement('li');
 
     const divLi = document.createElement('div');
     divLi.classList.add('list-content', 'text-secondary');
-       
+
     li.appendChild(divLi);
 
     const divCheckList = document.createElement('div');
@@ -44,97 +45,86 @@ function createList() {
     deleteIcon.setAttribute('role', 'button');
 
     const editIcon = document.createElement('i');
-    editIcon.classList.add('far','fa-edit', 'text-info');
+    editIcon.classList.add('far', 'fa-edit', 'text-info');
     editIcon.setAttribute('role', 'button');
     editIcon.setAttribute('data-toggle', 'modal');
     editIcon.setAttribute('data-target', '#Modal');
 
-    const quantityButton = document.createElement('input');
-    quantityButton.classList.add('quantity');
-    quantityButton.setAttribute('type', 'number');
-    quantityButton.setAttribute('name', 'quantity');
-    quantityButton.setAttribute('min', '1');
-    quantityButton.setAttribute('max', '20');
-    quantityButton.setAttribute('placeholder', '1');
+    const quantityButtonHtml = `<input class="quantity" type="number" aria-label="Insert a number" name="quantity" min="1" max="20" value="1" aria-describedby="number of items of the same kind">`;
 
     divEditList.appendChild(deleteIcon);
     divEditList.appendChild(editIcon);
-    divEditList.appendChild(quantityButton);
-
-    
+    divEditList.insertAdjacentHTML('beforeend', quantityButtonHtml);
 
     divLi.appendChild(divCheckList);
     divLi.appendChild(divEditList);
 
     todoList.appendChild(li);
 
-        // // The function measures the height of todo <ul> and adds 
-        // overflow:scroll if a certain value is exceded
-        measureToDoListHeight();
+    // // The function measures the height of todoList <ul> and adds 
+    // overflow:scroll if a certain value is exceded
+    measureToDoListHeight();
 
-        // The function that creates the functionalitie of the check/uncheck boxes
+    // The function that creates the functionalitie of the check/uncheck boxes
     function checkOrUnchek() {
         unCheckedIcon.classList.toggle('hidden');
         checkedIcon.classList.toggle('hidden');
-        if(!checkedIcon.classList.contains('hidden')){
+        if (!checkedIcon.classList.contains('hidden')) {
             listText.setAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
 
-        }
-        else{
+        } else {
             listText.removeAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
         }
     }
 
 
-        // Events for check/uncheck boxes
+    // Events for check/uncheck boxes
     unCheckedIcon.addEventListener('click', checkOrUnchek);
     checkedIcon.addEventListener('click', checkOrUnchek);
 
-        // The function deletes the selected <li>
+    // The function deletes the selected <li>
     function deleteList() {
         li.remove();
-        if(todoList.childElementCount===0){
+        if (todoList.childElementCount === 0) {
             listWraper.setAttribute('style', 'border-width:0px');
         }
     }
-        // Event for delete icon
+    // Event for delete icon
     deleteIcon.addEventListener('click', deleteList);
 
-        // Event for delete icon
-    editIcon.addEventListener('click', ()=>{
-        if(listText.classList.contains('marked')){}
-        else{
+    // Event for delete icon
+    editIcon.addEventListener('click', () => {
+        if (listText.classList.contains('marked')) {} else {
             const modalInput = document.querySelector('.inputForModal');
-            modalInput.value=listText.innerText;
+            modalInput.value = listText.innerText;
             listText.classList.add('marked');
         }
 
     });
 
     // Event for edit text box
-    function editText () {
+    function editText() {
         const modalInput = document.querySelector('.inputForModal');
         const markedList = document.querySelector('.marked');
-        if(markedList===null){}
-        else{
+        if (markedList === null) {} else {
             markedList.innerHTML = `${modalInput.value}`;
         }
-            
+
     }
 
     // Event for Cancel button
     const modalCancelButton = document.getElementById('modalCancelButton');
-    modalCancelButton.addEventListener('click', ()=>{
+    modalCancelButton.addEventListener('click', () => {
         listText.classList.remove('marked');
     });
 
     // Event for Save button
     const modalSaveButton = document.getElementById('modalSaveButton');
-    modalSaveButton.addEventListener('click', ()=>{
+    modalSaveButton.addEventListener('click', () => {
         editText();
         listText.classList.remove('marked');
     });
-   
+
 
 }
 // End Of ----- createList() ------- 
@@ -142,15 +132,14 @@ function createList() {
 
 // The function that adds the created <li> to the <ul>
 function addListToUl() {
-        if (inputNewListEntry.value.length > 0) {
+    if (inputNewListEntry.value.length > 0) {
         createList();
     }
 }
 
-function measureToDoListHeight(){
+function measureToDoListHeight() {
     const todolistHeight = todoList.scrollHeight;
-    console.log(todolistHeight);
-    if(todolistHeight>300){
+    if (todolistHeight > 300) {
         listWraper.setAttribute('style', 'overflow:scroll');
 
     }
@@ -170,26 +159,73 @@ inputNewListEntry.addEventListener('keypress', (event) => {
     }
 });
 
-function transitions(){
-    const col1 = document.querySelector('.col1');
-    col1.classList.toggle('transitionForCol1');
+function transitions() {
+    const colFullwidth = document.querySelector('.col-full-width');
+    colFullwidth.classList.toggle('transitionForColFullWidth');
 
-    const form = document.querySelector('.form');
-    form.classList.toggle('formTransition');
-
-    
-    inputNewListEntry.classList.toggle('hidden');
     inputListTitle.classList.toggle('hidden');
-    insertButton.classList.toggle('hidden'); 
     newList.classList.toggle('hidden');
-
-    const formGroup2Flex = document.querySelector('.form-group2-flex');
-    formGroup2Flex.classList.toggle('hidden');
-
-    
-
 
 }
 
+function addToDoList() {
+    const inputTemporaryHtml = `<form class="form-inline formWraper">
+    <input type="text" id="inputNewListName" class="form-control shadow " placeholder="Name Your List"
+      aria-label="Insert text" aria-describedby="edit an existing entry field">
+    <button type="button" id="plusButton" class=" btn-warning ">+</button>
+    <button type="button" id="minusButton" class=" btn-warning ">-</button>
+  </form>`;
+    const myListSummary = document.querySelector('.myListSummary');
+    myListSummary.insertAdjacentHTML('beforebegin', inputTemporaryHtml);
+
+    const form = document.querySelector('.formWraper');
+    const plusButton = document.getElementById('plusButton');
+    const minusButton = document.getElementById('minusButton');
+    const inputNewListName = document.getElementById('inputNewListName');
+
+
+    
+    
+    
+        function plusToDoList() {
+            if (inputNewListName.value.length > 0) {
+                const newLi = document.createElement('li');
+                newLi.classList.add('newListLi');
+                newLi.innerHTML = `<i class="fas fa-list-ol"></i><p>${inputNewListName.value}</p>`
+                myListSummary.insertAdjacentElement('beforeend', newLi);
+                form.remove();
+            }
+        }
+
+        // function plusShoppingList(){
+        //     if (inputNewListName.value.length > 0) {
+        //         const newLi = document.createElement('li');
+        //         myListSummary.insertAdjacentElement('beforeend', newLi);
+        //         form.remove();
+        //     }
+
+        // }
+
+        function minusTodoOrShoppingList() {
+            form.remove();
+        }
+
+        plusButton.addEventListener('click', plusToDoList);
+        minusButton.addEventListener('click', minusTodoOrShoppingList);
+    }
+
+
+
+
 newList.addEventListener('click', transitions);
 
+
+addToDoListButton.addEventListener('click', ()=>{
+    let countForms = document.querySelectorAll('.formWraper')
+    if(countForms.length===0){
+        addToDoList();
+
+
+    }
+    
+} );
