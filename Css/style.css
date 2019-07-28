@@ -5,14 +5,21 @@
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
+    font-size: 100%;
     margin: 0;
     padding: 0;
     
 
 }
+.hidden {
+    display: none;
+}
 
-.modal{
-    left: 25vw;
+.not-visible{
+    visibility: hidden;
+}
+.capitalize {
+    text-transform: capitalize;
 }
 
 .modal-header{
@@ -24,11 +31,12 @@ body {
 }
 
 .container-fluid{
-    width:60vw;
-    height:90vh;
+    width:80vw;
+    /* height:90vh; */
     background-color: #fff;
     margin-top:5vh;
     /* margin-bottom: 5vh; */
+    /* border:5px solid #2b3f5d; */
 }
 
 header {
@@ -72,29 +80,53 @@ margin-left:auto;
     
 }
 .listSummarySection{
-    /* font-family: 'Merriweather', serif; */
-    margin-top: 20vh;
-    padding-left: 2vw;
+    background-color: #f1f2f6;
+}
+
+.listSummarySection .myListSummary-wraper{
+    height:30vh;
+    margin-top: 50%;
 }
 .listSummarySection h4{
-    /* font-family: 'Merriweather', serif; */
     font-family: 'Yanone Kaffeesatz', sans-serif;
     text-decoration: underline;
     font-size: 2em;
+    margin-top: 10vh;
+    margin-left: 50px;
+}
+.listSummarySection .formWraper{
+    width: 25vw;
+    margin-bottom: 10px;
+    margin-top: 5px;
+
 }
 .listSummarySection #inputNewListName{
-    width: 80%;
+    width: 88%;
 }
 
 .myListSummary{
-    padding-left:20px;
+    width: 90%;
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 300;
 }
  .myListSummary li{
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    /* font-family: 'Merriweather', serif; */
     text-transform: capitalize;
     list-style: none;
     font-size: 1.3em;
+    margin-bottom: 5px;
+}
+ /* .myListSummary li .btn-outline-warning{
+    color:#2b3f5d;
+    
+    
+} */
+ .myListSummary li .btn{
+    font-weight:300;
+    
+    
 }
 
 .myListSummary li p{
@@ -129,15 +161,11 @@ margin-left:auto;
     -webkit-transition: left 1s ease;
     transition: left 1s ease;
 }
+
 .transitionForColFullWidth {
     left: -100vw;
 
 }
-
-
-
-
-
 
 .form-group2-flex{
     display:-webkit-box;
@@ -160,16 +188,9 @@ margin-left:auto;
     margin-left: 5px;
 }
 
-
-
-.not-visible{
-    visibility: hidden;
-}
-
 .form {
     margin-top: 30vh;
-    -webkit-transition: margin-left 0.5 ease;
-    transition: margin-left 0.5 ease;
+    
 }
 
 
@@ -207,15 +228,13 @@ margin-left:auto;
     padding: 0.5rem;
     color: #fff;
 }
+
 .col1{
 border-right:0.5px solid #2b3f5d;
 margin-top:30px;
 
 }
 .list-types{
-    /* display:flex;
-    flex-direction: column; */
-    /* margin-top: 30vh; */
     text-align: left;
     list-style: none;
 }
@@ -224,42 +243,110 @@ margin-top:30px;
     color:#2b3f5d;
 }
 
+.list-content{
+    width:90%;
+    padding:0;
+    padding-right: 10px;
+}
 
-
+.list-component{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width:90%;
+    padding:0;
+    padding-right: 10px;
+    border-bottom: 0.5px solid #d1ccc0;
+}
 
 .list-wraper {
-    position:relative;
-    background-color: #fff;
-    /* color: #000; */
-    margin: 0 auto;
-    margin-top: 20vh;
-    width: 30vw;
-    height: 500px;
-    border:0.5px solid #ccae62;
-    border-radius:10px;
-}
-
-.todo-list {
-    margin-top: 3vh;
-    text-align: left;
-    
-}
-    
- #input-List-title{
-    position:-webkit-sticky;
-    position:sticky;
-    left: 0;
-    top: 0;
     width: 100%;
-    text-transform: capitalize;
-    margin-bottom: 3vh;
-    border: 1px solid #ccae62;
-     
+    height: 70vh;
+    margin: 0 auto;
+    /* margin-top: 8vh; */
+    
 }
 
-#input-new-line{
-    width:40%;
+.list-wraper .taskForm{
+    display: flex;
+    margin-top: 5px;
+    margin-right: 15%;
 }
+
+.list-wraper .taskForm .component1{
+    margin-left:auto;
+    width: 50%;
+}
+
+.list-wraper .taskForm .component1 #input-new-line{
+    width: 100%;
+}
+
+.list-wraper .taskForm .addTask{
+    display:inline-block;
+}
+
+ .list-wraper .taskForm .addTask .plus{
+    font-size:1.5em;
+}
+
+
+
+.list-wraper .taskForm .component2{
+    margin-top: 8px;
+    margin-left: 20px;
+    color:#218c74;
+    cursor:pointer;
+}
+
+
+.list-wraper .taskForm .component2 .fa-plus-square{
+    font-size: 1.2em;
+}
+
+.list-wraper .taskForm .component2 h5 {
+    display:inline-block;
+}
+
+.list-wraper .todo-name{
+    width: 17%;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.5em;
+    font-weight:300;
+    letter-spacing: 3px;
+    color: #2b3f5d;
+    text-transform: capitalize;
+    border-bottom: 1px solid #2b3f5d;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-left: 5%;
+    padding-bottom: 3px;
+    
+    
+}
+
+.list-wraper .todo-list {
+    margin-top: 5vh;
+    width: 80%;
+    margin-left: 15%;
+    padding-bottom: 20px;
+    
+}
+
+
+
+.todo-list li {
+    margin-bottom: 2vh;
+    color: #495057;
+    list-style: none;
+
+}
+
+   
+
+
+
+
 
 .changePlaceholderTextColor::-webkit-input-placeholder{
     color:#fff;
@@ -277,12 +364,6 @@ margin-top:30px;
     color:#fff;
 }
 
-.todo-list li {
-    margin-bottom: 2vh;
-    color: #495057;
-    list-style: none;
-
-}
 
 .far {
     cursor: pointer;
@@ -294,6 +375,7 @@ margin-top:30px;
 
 .fa-check-circle {
     padding-right: 5px;
+    font-size: 1.2em;
 
 }
 
@@ -303,21 +385,14 @@ margin-top:30px;
     padding-left: 2px !important;
     border-radius:1px;
 }
-.hidden {
-    display: none;
-}
 
-.list-content {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 90%;
-    padding-right: 10px;
-    border-bottom: 0.5px solid #d1ccc0;
-}
 
 .check-list p {
     display: inline;
+    font-size: 1.1em;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.2em;
+    font-weight: 300;
 }
 
 .edit-list {
@@ -342,5 +417,6 @@ margin-top:30px;
 .bg-primary{
     background-color:  #2b3f5d !important;
 }
+
 
 
