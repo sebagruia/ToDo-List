@@ -4,7 +4,6 @@ const insertButton = document.querySelector('#insertEntryButton');
 const todoList = document.querySelector('.todo-list');
 const listWraper = document.querySelector('.list-wraper');
 const newList = document.querySelector('.newList');
-// const inputListTitle = document.querySelector('#input-List-title');
 const addToDoListButton = document.getElementById('buttonForAddingToDoList');
 const addShoppingListButton = document.getElementById('buttonForAddingShoppingList');
 
@@ -16,7 +15,7 @@ function createListAndFunctionalities() {
     <div class="check-list">
     <i class="far fa-circle" role="button" aria-hidden="true"></i>
     <i class="far fa-check-circle text-success hidden" role="button" aria-hidden="true"></i>
-    <p class="p-text">asda</p>
+    <p class="p-text"></p>
     </div>
     <div class="edit-list">
     <i class="far fa-times-circle text-danger" role="button" aria-hidden="true"></i>
@@ -33,12 +32,8 @@ function createListAndFunctionalities() {
     const checkedIcon = document.querySelector('.fa-check-circle');
     const unCheckedIcon = document.querySelector('.fa-circle');
     const deleteIcon = document.querySelector('.fa-times-circle');
-    const editIcon = document.querySelector('.fa-edit');
     const listText = document.querySelector('.p-text');
-    listText.innerHTML = `${inputNewListEntry.value}`;
-   
 
-    
 
     // // The function measures the height of todoList <ul> and adds 
     // overflow:scroll if a certain value is exceded
@@ -71,68 +66,11 @@ function createListAndFunctionalities() {
     // Event for delete icon
     deleteIcon.addEventListener('click', deleteList);
 
-    // Event for delete icon
-    editIcon.addEventListener('click', () => {
-        if (listText.classList.contains('marked')) {} 
-        else {
-            const modalInput = document.querySelector('.inputForModal');
-            modalInput.value = listText.innerText;
-            listText.classList.add('marked');
-        }
-
-    });
-
-    // Event for edit text box
-    function editText() {
-        const modalInput = document.querySelector('.inputForModal');
-        const markedList = document.querySelector('.marked');
-        if (markedList === null) {} 
-        else {
-            markedList.innerHTML = `${modalInput.value}`;
-        }
-
-    }
-
-    // Event for Modal Cancel button
-    const modalCancelButton = document.getElementById('modalCancelButton');
-    modalCancelButton.addEventListener('click', () => {
-        listText.classList.remove('marked');
-    });
-
-    // Event for Modal Save button
-    const modalSaveButton = document.getElementById('modalSaveButton');
-    modalSaveButton.addEventListener('click', () => {
-        editText();
-        listText.classList.remove('marked');
-    });
-
-
-
-
 }
 // End Of ----- createList() ------- 
 
-// function createInputForNewLine() {
-//     const taskFromHtml = `<div class="component1">
-//     <input type="text" id="input-new-line" class="form-control shadow " placeholder="Your wish is my command"
-//       aria-label="Insert text" aria-describedby="edit an existing entry field">
-//   </div>
-//   <div  id="insertEntryButton" class="component2" role="button">
-//     <i class="far fa-plus-square"></i>
-//     <h5 class="addTask">Add a task</h5>
-//   </div>`;
-//     const taskForm = document.querySelector('.taskForm');
-//     taskForm.innerHTML = taskFromHtml;
-// }
 
 
-
-// The function that adds the created <li> to the <ul>
-function addListToUl() {
-    if (inputNewListEntry.value.length > 0) {
-        createListAndFunctionalities();
-    }
-}
 
 function measureToDoListHeight() {
     const todolistHeight = todoList.scrollHeight;
@@ -142,9 +80,6 @@ function measureToDoListHeight() {
 
     }
 }
-
-// createInputForNewLine();
-
 
 
 function transitions() {
@@ -172,25 +107,19 @@ function addToDoList() {
     const minusButton = document.getElementById('minusButton');
     const inputNewListName = document.getElementById('inputNewListName');
     const toDoListName = document.querySelector('.todo-name');
-    const listWraper = document.querySelector('.list-wraper');
+    // const listWraper = document.querySelector('.list-wraper');
     const myListSummaryWraper = document.querySelector('.myListSummary-wraper');
 
-
+    function measureMyListSummaryHeight() {
+        const myListSummaryHeight = myListSummary.scrollHeight;
+        if (myListSummaryHeight > 200) {
+            myListSummaryWraper.setAttribute('style', 'overflow-y:scroll');
+        }
+    }
     function setNameForToDoList() {
         toDoListName.innerHTML = `${inputNewListName.value}`;
     }
-
-
-    function measureMyListSummaryHeight() {
-        
-        const myListSummaryHeight = myListSummary.scrollHeight;
-        console.log(myListSummaryHeight);
-        if (myListSummaryHeight > 200) {
-            myListSummaryWraper.setAttribute('style', 'overflow-y:scroll');
-    
-        }
-    }
-
+   
 
     function plusToDoList() {
         if (inputNewListName.value.length > 0) {
@@ -199,40 +128,18 @@ function addToDoList() {
             newLi.innerHTML = `<button type="button" class="btn btn-outline-warning btn-lg btn-block capitalize ">${inputNewListName.value}</button>`
             myListSummary.insertAdjacentElement('afterbegin', newLi);
             measureMyListSummaryHeight();
-
             setNameForToDoList();
-            listWraper.classList.remove('not-visible');
-
+            // listWraper.classList.remove('not-visible');
             form.remove();
-
-            // createInputForNewLine();
-
-            const inputNewListEntry = document.getElementById('input-new-line');
-            const insertButton = document.querySelector('#insertEntryButton');
-
-            insertButton.addEventListener('click', (event) => {
-                addListToUl();
-                inputNewListEntry.value = '';
-            });
-            
-            inputNewListEntry.addEventListener('keypress', (event) => {
-                if (inputNewListEntry.value.length > 0 && event.keyCode === 13) {
-                    addListToUl();
-                    inputNewListEntry.value = '';
-                }
-            });
-
         }
     }
-
-
 
     function minusTodoOrShoppingList() {
         form.remove();
     }
 
     plusButton.addEventListener('click', plusToDoList);
-    inputNewListName.addEventListener('keypress', (event)=>{
+    inputNewListName.addEventListener('keypress', (event) => {
         if (inputNewListName.value.length > 0 && event.keyCode === 13) {
             plusToDoList();
             inputNewListName.value = '';
@@ -242,9 +149,101 @@ function addToDoList() {
 
     minusButton.addEventListener('click', minusTodoOrShoppingList);
 
+}
+// End Of ----- addToDoList() ------- 
 
+
+function createNewUlContent() {
+    const component1 = document.querySelector('.component1');
+    const component1Html = `<input type="text" id="input-new-line" class="form-control shadow " placeholder="New task"
+   aria-label="Insert text" aria-describedby="edit an existing entry field">`;
+    component1.innerHTML = component1Html;
+    const inputNewListEntry = document.getElementById('input-new-line');
+    const insertButton = document.querySelector('#insertEntryButton');
+    const insertButtonHtml = `<i class="far fa-plus-square"></i>
+   <h5 class="addTask">Add a task</h5>`;
+    insertButton.innerHTML = insertButtonHtml;
+
+ 
+    function addListToUl() {
+        if (inputNewListEntry.value.length > 0) {
+            createListAndFunctionalities();
+            const listText = document.querySelector('.p-text');
+            listText.innerHTML = `${inputNewListEntry.value}`;
+            const editIcon = document.querySelector('.fa-edit');
+
+
+            // Event for Modal Cancel button
+            const modalCancelButton = document.getElementById('modalCancelButton');
+            modalCancelButton.addEventListener('click', () => {
+                listText.classList.remove('marked');
+            });
+
+            // Event for edit text box
+            function editText() {
+                const modalInput = document.querySelector('.inputForModal');
+                const markedList = document.querySelector('.marked');
+                if (markedList === null) {} else {
+                    markedList.innerHTML = `${modalInput.value}`;
+                }
+
+            }
+
+           
+
+            // Event for delete icon
+            editIcon.addEventListener('click', () => {
+                if (listText.classList.contains('marked')) {} else {
+                    const modalInput = document.querySelector('.inputForModal');
+                    modalInput.value = listText.innerText;
+                    listText.classList.add('marked');
+                }
+
+            });
+
+            // Event for Modal Save button
+            const modalSaveButton = document.getElementById('modalSaveButton');
+            modalSaveButton.addEventListener('click', () => {
+                editText();
+                listText.classList.remove('marked');
+            });
+
+        }
+    }
+
+
+    insertButton.addEventListener('click', (event) => {
+        addListToUl();
+        inputNewListEntry.value = '';
+    });
+
+    inputNewListEntry.addEventListener('keypress', (event) => {
+        if (inputNewListEntry.value.length > 0 && event.keyCode === 13) {
+            addListToUl();
+            inputNewListEntry.value = '';
+        }
+    });
 
 }
+
+// End Of ----- createNewUlContent () ------- 
+
+const myListSummary = document.querySelector('.myListSummary');
+myListSummary.addEventListener('click', ()=>{
+        const listWraper = document.querySelector('.list-wraper');
+        listWraper.classList.remove('not-visible');
+        createNewUlContent();
+    
+
+});
+
+
+
+
+
+
+
+
 
 
 function addShoppingList() {
@@ -254,16 +253,15 @@ function addShoppingList() {
     <button type="button" id="plusButton" class=" btn-warning ">+</button>
     <button type="button" id="minusButton" class=" btn-warning ">-</button>
   </form>`;
-  const myListSummary = document.querySelector('.myListSummary');
-  const listSummarySection = document.querySelector('.listSummarySection');
-  listSummarySection.insertAdjacentHTML('afterbegin', inputTemporaryHtml);
+    const myListSummary = document.querySelector('.myListSummary');
+    const listSummarySection = document.querySelector('.listSummarySection');
+    listSummarySection.insertAdjacentHTML('afterbegin', inputTemporaryHtml);
 
     const form = document.querySelector('.formWraper');
     const plusButton = document.getElementById('plusButton');
     const minusButton = document.getElementById('minusButton');
     const inputNewListName = document.getElementById('inputNewListName');
     const toDoListName = document.querySelector('.todo-name');
-    const listWraper = document.querySelector('.list-wraper');
     const myListSummaryWraper = document.querySelector('.myListSummary-wraper');
 
     function setNameForToDoList() {
@@ -272,12 +270,11 @@ function addShoppingList() {
 
 
     function measureMyListSummaryHeight() {
-        
         const myListSummaryHeight = myListSummary.scrollHeight;
         console.log(myListSummaryHeight);
         if (myListSummaryHeight > 200) {
             myListSummaryWraper.setAttribute('style', 'overflow-y:scroll');
-    
+
         }
     }
 
@@ -290,10 +287,7 @@ function addShoppingList() {
             newLi.innerHTML = `<button type="button" class="btn btn-outline-success btn-lg btn-block capitalize ">${inputNewListName.value}</button>`
             myListSummary.insertAdjacentElement('afterbegin', newLi);
             measureMyListSummaryHeight();
-
             setNameForToDoList();
-            listWraper.classList.remove('not-visible');
-
             form.remove();
 
             const inputNewListEntry = document.getElementById('input-new-line');
@@ -303,7 +297,7 @@ function addShoppingList() {
                 addListToUl();
                 inputNewListEntry.value = '';
             });
-            
+
             inputNewListEntry.addEventListener('keypress', (event) => {
                 if (inputNewListEntry.value.length > 0 && event.keyCode === 13) {
                     addListToUl();
@@ -313,21 +307,23 @@ function addShoppingList() {
         }
     }
 
-    function minusTodoOrShoppingList() {
-        form.remove();
-    }
+
 
     plusButton.addEventListener('click', plusShoppingList);
-    inputNewListName.addEventListener('keypress', (event)=>{
+    inputNewListName.addEventListener('keypress', (event) => {
         if (inputNewListName.value.length > 0 && event.keyCode === 13) {
             plusShoppingList();
             inputNewListName.value = '';
         }
 
     });
+
+    function minusTodoOrShoppingList() {
+        form.remove();
+    }
+
     minusButton.addEventListener('click', minusTodoOrShoppingList);
 }
-
 
 
 
