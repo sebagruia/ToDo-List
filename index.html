@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo - Do it Right 2</title>
+  <title>ToDo - Do it Right </title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,700i,900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,600i,700,700i,900&display=swap"
@@ -78,12 +78,6 @@
                   <h5 class="newList2-text font-weight-light">Add Todo List</h5>
                 </button>
               </li>
-              <li class="nav-item item2">
-                <button type="button" id="buttonForAddingShoppingList" class="btn btn-outline-secondary wraper">
-                  <i class="fas fa-cart-plus"></i>
-                  <h5 class="newList2-text font-weight-light">Add Shopping List</h5>
-                </button>
-              </li>
             </ul>
           </div>
 
@@ -98,42 +92,15 @@
 
 
     <div class="row">
-      <div class="col-sm-4 listSummarySection">
+      <div class="col-lg-4 listSummarySection">
         <div class="myListSummary-wraper">
+            <button type="button" id="dropdownMenuButton" class="btn btn-outline-warning dropdown-toggle btn-lg btn-block capitalize  hidden " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Your Lists</button>
           <ul class="myListSummary"></ul>
         </div>
 
       </div><!-- End Of Col -->
 
-      <div class="col-sm-8 list-content">
-        <!-- <div class="list-wraper not-visible "> 
-          <form class="taskForm">
-            <div class="component1">
-              <input type="text" id="input-new-line" class="form-control shadow " placeholder="New task"
-                aria-label="Insert text" aria-describedby="edit an existing entry field">
-            </div>
-            <div id="insertEntryButton" class="component2" role="button">
-              <i class="far fa-plus-square"></i>
-              <h5 class="addTask">Add a task</h5>
-            </div>
-          </form>
-           <h3 class="todo-name"></h3>
-          <ul class="todo-list">
-    <li class="li-item"><div class="list-component text-secondary">
-      <div class="check-list">
-          <i class="far fa-circle" role="button" aria-hidden="true"></i>
-          <i class="far fa-check-circle text-success hidden" role="button" aria-hidden="true"></i>
-          <p class="p-text"></p>
-      </div>
-      <div class="edit-list">
-          <i class="far fa-times-circle text-danger" role="button" aria-hidden="true"></i>
-          <i class="far fa-edit text-info" role="button" data-toggle="modal" data-target="#Modal" aria-hidden="true"></i>
-          <input class="quantity" type="number" aria-label="Insert a number" name="quantity" min="1" max="20" value="1" aria-describedby="number of items of the same kind">
-      </div>
-    
-    </li>
-          </ul> -->
-        </div>
+      <div class="col-lg-8 list-content"></div>
 
       </div> <!-- End Of Col -->
 
