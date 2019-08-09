@@ -4,11 +4,11 @@ const addToDoListButton = document.getElementById('buttonForAddingToDoList');
 const addShoppingListButton = document.getElementById('buttonForAddingShoppingList');
 const myListSummary = document.querySelector('.myListSummary');
 const newListLi = document.querySelector('.newListLi')
-let count = 0;
+// let count = 0;
 let countButtons = 0;
 
 
-const transitions = () =>{
+const transitions = () => {
     const colFullwidth = document.querySelector('.col-full-width');
     colFullwidth.classList.toggle('transitionForColFullWidth');
     newList.classList.toggle('hidden');
@@ -18,7 +18,7 @@ newList.addEventListener('click', transitions);
 
 const createFormforAddingListButtons = () => {
     const inputAddingButtonsHtml = `<form class="form-inline formWraper">
-    <input type="text" id="inputNewListName" class="form-control" placeholder="Name Your List"
+    <input type="text" id="inputNewListItem" class="form-control" placeholder="Name Your List"
       aria-label="Insert text" aria-describedby="edit an existing entry field">
     <button type="button" id="plusButton" class=" btn-warning ">+</button>
     <button type="button" id="minusButton" class=" btn-warning ">-</button>
@@ -34,7 +34,7 @@ const addToDoButtonAndForm = () => {
     const form = document.querySelector('.formWraper');
     const plusButton = document.getElementById('plusButton');
     const minusButton = document.getElementById('minusButton');
-    const inputNewListName = document.getElementById('inputNewListName');
+    const inputNewListItem = document.getElementById('inputNewListItem');
     const myListSummaryWraper = document.querySelector('.myListSummary-wraper');
 
     const measureMyListSummaryHeight = () => {
@@ -46,20 +46,20 @@ const addToDoButtonAndForm = () => {
 
     const pressPlusToDoListButton = () => {
         const windowWidth = window.innerWidth;
-        console.log(windowWidth);
-        if (inputNewListName.value.length > 0) {
+        if (inputNewListItem.value.length > 0) {
             const newLi = document.createElement('li');
             const buttonToHide = document.getElementById('dropdownMenuButton');
             newLi.classList.add('newListLi');
-            if (windowWidth > 800) {
-                newLi.innerHTML = `<button type="button" class="btn btn-outline-warning btn-lg btn-block capitalize button-color-orange ">${inputNewListName.value}</button>`;
+
+            if (windowWidth >= 992) {
+                newLi.innerHTML = `<button type="button" class="btn btn-outline-warning btn-lg btn-block capitalize button-color-orange ">${inputNewListItem.value}</button>`;
                 if (buttonToHide.classList.contains('hidden')) {} else {
                     buttonToHide.classList.add('hidden');
                 }
 
             } else {
                 buttonToHide.classList.remove('hidden');
-                newLi.innerHTML = `${inputNewListName.value}`;
+                newLi.innerHTML = `${inputNewListItem.value}`;
                 newLi.classList.add('dropdown-item');
                 myListSummary.classList.add('dropdown-menu');
                 myListSummary.setAttribute('aria-labelledby', 'dropdownMenuButton');
@@ -71,7 +71,6 @@ const addToDoButtonAndForm = () => {
         measureMyListSummaryHeight();
         form.remove();
 
-
     }
 
 
@@ -81,30 +80,54 @@ const addToDoButtonAndForm = () => {
         form.remove();
     }
 
+    const execute = () => {
+        addListToUl(countButtons);
+    }
 
     plusButton.addEventListener('click', () => {
 
         pressPlusToDoListButton();
         const newListLi = document.querySelectorAll('.newListLi');
-        newListLi[countButtons].addEventListener('click', () => {
+        newListLi[countButtons].addEventListener('click', (event) => {
+            console.log(`newListLi number ${countButtons}`);
             execute();
+            const listWraper = document.querySelectorAll('.list-wraper');
+            console.log(listWraper);
+            for (let i = 0; i < listWraper.length; i++) {
+                // if (!listWraper[i].classList.contains('not-visible')) {
+                    listWraper[i].classList.add('not-visible')
+                // }
+            }
+
+            let newIterator = countButtons-1
+            listWraper[newIterator].classList.remove('not-visible');
 
 
         }, {
             once: true
         });
 
-        countButtons++;
 
     });
 
 
 
-    inputNewListName.addEventListener('keypress', (event) => {
-        if (inputNewListName.value.length > 0 && event.keyCode === 13) {
+    inputNewListItem.addEventListener('keypress', (event) => {
+        if (inputNewListItem.value.length > 0 && event.key === "Enter") {
             pressPlusToDoListButton();
-            inputNewListName.value = '';
+            const newListLi = document.querySelectorAll('.newListLi');
+            console.log(`newListLi number ${countButtons}`);
+            newListLi[countButtons].addEventListener('click', () => {
+                execute();
+
+            }, {
+                once: true
+            });
+
+            
+            inputNewListItem.value = '';
         }
+
 
     });
 
@@ -120,10 +143,21 @@ addToDoListButton.addEventListener('click', () => {
     if (countForms.length === 0) {
         createFormforAddingListButtons();
         addToDoButtonAndForm();
+        const getFocus = ()=>{
+            const myListSummary = document.querySelector('.myListSummary');
+            if(myListSummary.childElementCount===0){} 
+            else if(myListSummary.childElementCount>0){
+                myListSummary.lastElementChild.focus();
+
+            }  
+
+            getFocus();
+        
+    }
+
     }
 
 });
-
 
 
 const createListForToDoUl = () => {
@@ -146,17 +180,17 @@ const createListForToDoUl = () => {
 const createDivListWraper = () => {
     const listContent = document.querySelector('.list-content');
     const listWraper = document.createElement('div');
-    listWraper.classList.add('list-wraper');
+    listWraper.classList.add('list-wraper', 'not-visible');
 
     const taskForm = document.createElement('form');
     taskForm.classList.add('taskForm');
     const taskFormHtml = `<div class="component1">
-    <input type="text" class="form-control shadow input-new-line" placeholder="New task"
+    <input type="text" class="form-control shadow input-new-line" placeholder="New item"
       aria-label="Insert text" aria-describedby="edit an existing entry field">
   </div>
   <div class="component2 insertEntryButton" role="button">
     <i class="far fa-plus-square"></i>
-    <h5 class="addTask">Add a task</h5>
+    <h5 class="addTask">Add new item</h5>
   </div>`;
     taskForm.innerHTML = taskFormHtml;
     listWraper.insertAdjacentElement('afterbegin', taskForm);
@@ -173,6 +207,7 @@ const createDivListWraper = () => {
 }
 
 
+
 const addListToUl = (number) => {
     createDivListWraper();
     const windowWidth = window.innerWidth;
@@ -185,17 +220,15 @@ const addListToUl = (number) => {
 
     const todoList = document.querySelectorAll('.todo-list');
 
-
+   
     const newListLi = document.querySelectorAll('.newListLi');
-    newListLi[number].addEventListener('click', () => {
-        console.log('Second Hit');
+    newListLi.item(number).addEventListener('click', (event) => {
+        console.log(`newListLi number at Second Hit ${countButtons}`);
         const listWraper = document.querySelectorAll('.list-wraper');
         for (let i = 0; i < listWraper.length; i++) {
-            if (!listWraper[i].classList.contains('not-visible')) {
-                listWraper[i].classList.toggle('not-visible')
-            }
+                listWraper[i].classList.add('not-visible')
         }
-        listWraper[number].classList.toggle('not-visible');
+        listWraper.item(number).classList.remove('not-visible');
 
     });
 
@@ -204,51 +237,47 @@ const addListToUl = (number) => {
         const todoName = document.querySelectorAll('.todo-name');
         const buttonOrange = document.querySelectorAll('.button-color-orange');
         if (windowWidth > 800) {
-            todoName[number].innerHTML = buttonOrange[number].innerText;
+            todoName.item(number).innerHTML = buttonOrange.item(number).innerText;
 
         } else {
-            todoName[number].innerHTML = newLi[number].innerText;
+            todoName.item(number).innerHTML = newLi.item(number).innerText;
         }
 
     }
-
-    const editText = () => {
-        const modalInput = document.querySelector('.inputForModal');
-        const markedList = document.querySelector('.marked');
-        if (markedList === null) {} else {
-            markedList.innerHTML = `${modalInput.value}`;
-        }
-    }
-
-    const  measureToDoListHeight = () => {
-        const todolistHeight = todoList[number].scrollHeight;
+   
+   
+    const measureToDoListHeight = () => {
+        const todolistHeight = todoList.item(number).scrollHeight;
         if (windowWidth > 992) {
             if (todolistHeight > 400) {
-                listWraper[number].setAttribute('style', 'overflow-y:scroll');
-            
-        }
+                listWraper.item(number).setAttribute('style', 'overflow-y:scroll');
 
-    } else  {
-        if(todolistHeight > 200){
-            listWraper[number].setAttribute('style', 'overflow-y:scroll');
+            }
+
+        } else {
+            if (todolistHeight > 200) {
+                listWraper.item(number).setAttribute('style', 'overflow-y:scroll');
+            }
+
+
         }
-        
 
     }
 
-    }
+
+   
 
     const insertLineInUl = () => {
 
         const todoListHtml = createListForToDoUl();
-        todoList[number].insertAdjacentHTML('afterbegin', todoListHtml);
+        todoList.item(number).insertAdjacentHTML('afterbegin', todoListHtml);
 
 
         const li = document.querySelectorAll('.li-item');
         const checkedIcon = document.querySelectorAll('.fa-check-circle');
         const unCheckedIcon = document.querySelectorAll('.fa-circle');
         const listText = document.querySelectorAll('.p-text');
-        listText[number].innerHTML = `${inputNewListEntry[number].value}`;
+        listText.item(number).innerHTML = `${inputNewListEntry.item(number).value}`;
         const deleteIcon = document.querySelectorAll('.fa-times-circle');
         const editIcon = document.querySelectorAll('.fa-edit');
 
@@ -256,69 +285,80 @@ const addListToUl = (number) => {
 
         // The function that creates the functionalitie of the check/uncheck boxes
         const checkOrUnchek = () => {
-            unCheckedIcon[number].classList.toggle('hidden');
-            checkedIcon[number].classList.toggle('hidden');
-            if (!checkedIcon[number].classList.contains('hidden')) {
-                listText[number].setAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
+            unCheckedIcon.item(number).classList.toggle('hidden');
+            checkedIcon.item(number).classList.toggle('hidden');
+            if (!checkedIcon.item(number).classList.contains('hidden')) {
+                listText.item(number).setAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
 
             } else {
-                listText[number].removeAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
+                listText.item(number).removeAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
             }
         }
 
+        const editText = () => {
+            const modalInput = document.querySelector('.inputForModal');
+            const markedList = document.querySelector('.marked');
+            if (markedList === null) {} else {
+                markedList.innerHTML = `${modalInput.value}`;
+            }
+        }
+    
+        
+
         // Events for check/uncheck boxes
-        unCheckedIcon[number].addEventListener('click', checkOrUnchek);
-        checkedIcon[number].addEventListener('click', checkOrUnchek);
+        unCheckedIcon.item(number).addEventListener('click', checkOrUnchek);
+        checkedIcon.item(number).addEventListener('click', checkOrUnchek);
 
         modalCancelButton.addEventListener('click', () => {
-            listText[number].classList.remove('marked');
+            listText.item(number).classList.remove('marked');
         });
 
         modalSaveButton.addEventListener('click', () => {
             editText();
-            listText[number].classList.remove('marked');
+            listText.item(number).classList.remove('marked');
         });
 
         measureToDoListHeight();
         // The function deletes the selected <li>
         const deleteList = () => {
-            li[number].remove();
-            if (todoList[number].childElementCount === 0) {
-                listWraper[number].setAttribute('style', 'border-width:0px');
+            li.item(number).remove();
+            if (todoList.item(number).childElementCount === 0) {
+                listWraper.item(number).setAttribute('style', 'border-width:0px');
             }
         }
         // Event for delete icon
-        deleteIcon[number].addEventListener('click', deleteList);
+        deleteIcon.item(number).addEventListener('click', deleteList);
 
-        editIcon[number].addEventListener('click', () => {
-            if (listText[number].classList.contains('marked')) {} else {
+        editIcon.item(number).addEventListener('click', () => {
+            if (listText.item(number).classList.contains('marked')) {} else {
                 const modalInput = document.querySelector('.inputForModal');
-                modalInput.value = listText[number].innerText;
-                listText[number].classList.add('marked');
+                modalInput.value = listText.item(number).innerText;
+                listText.item(number).classList.add('marked');
             }
         });
 
 
     }
 
-
-
-    insertButton[number].addEventListener('click', (event) => {
-        insertLineInUl();
-        inputNewListEntry[number].value = '';
-    });
-
-    inputNewListEntry[number].addEventListener('keypress', (event) => {
-        if (inputNewListEntry[number].value.length > 0 && event.keyCode === 13) {
+    
+    inputNewListEntry.item(number).addEventListener('keypress', (event) => {
+        if (inputNewListEntry.item(number).value.length > 0 && event.key === "Enter") {
             insertLineInUl();
-            inputNewListEntry[number].value = '';
+            inputNewListEntry.item(number).value = '';
         }
     });
+
+
+    insertButton.item(number).addEventListener('click', (event) => {
+        insertLineInUl();
+        inputNewListEntry.item(number).value = '';
+    });
+
+    
+
+    
+    countButtons++;
 
 }
 // End Of ----- addListToUl() ------- 
 
-const execute = () => {
-    addListToUl(count);
-    count++;
-}

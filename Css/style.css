@@ -103,7 +103,7 @@ nav .changedStyle {
 
 }
 
-.listSummarySection #inputNewListName {
+.listSummarySection #inputNewListItem {
     width: 88%;
 }
 
@@ -488,7 +488,7 @@ nav .changedStyle {
         font-size: 1.1rem;
     }
 
-    .listSummarySection #inputNewListName {
+    .listSummarySection #inputNewListIten {
         width: 82%;
     }
 
@@ -507,7 +507,7 @@ nav .changedStyle {
     }
 
     .myListSummary li {
-        text-align: center;
+        text-align: left;
     }
 
     .list-content {
@@ -531,7 +531,7 @@ nav .changedStyle {
 
 
 @media screen and (min-width: 375px) {
-    .listSummarySection #inputNewListName {
+    .listSummarySection #inputNewListItem {
         width: 85%;
     }
 
@@ -635,7 +635,7 @@ nav .changedStyle {
         margin-top: 30%;
     }
 
-    .listSummarySection #inputNewListName {
+    .listSummarySection #inputNewListItem {
         width: 82%;
     }
 
@@ -646,7 +646,7 @@ nav .changedStyle {
 }
 
 @media screen and (min-width:1280px) {
-    .listSummarySection #inputNewListName {
+    .listSummarySection #inputNewListItem {
         width: 86%;
     }
 
@@ -654,7 +654,7 @@ nav .changedStyle {
 
 
 @media screen and (min-width:1366px) {
-    .listSummarySection #inputNewListName {
+    .listSummarySection #inputNewListItem {
         width: 87%;
     }
 
@@ -662,7 +662,7 @@ nav .changedStyle {
 
 
 @media screen and (min-width: 1680px){
-.listSummarySection #inputNewListName {
+.listSummarySection #inputNewListItem {
     width: 90%;
 }
 }
