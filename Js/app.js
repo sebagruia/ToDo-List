@@ -94,9 +94,7 @@ const addToDoButtonAndForm = () => {
             const listWraper = document.querySelectorAll('.list-wraper');
             console.log(listWraper);
             for (let i = 0; i < listWraper.length; i++) {
-                // if (!listWraper[i].classList.contains('not-visible')) {
                     listWraper[i].classList.add('not-visible')
-                // }
             }
 
             let newIterator = countButtons-1
@@ -119,6 +117,15 @@ const addToDoButtonAndForm = () => {
             console.log(`newListLi number ${countButtons}`);
             newListLi[countButtons].addEventListener('click', () => {
                 execute();
+                const listWraper = document.querySelectorAll('.list-wraper');
+            console.log(listWraper);
+            for (let i = 0; i < listWraper.length; i++) {
+                    listWraper[i].classList.add('not-visible')
+            }
+
+            let newIterator = countButtons-1
+            listWraper[newIterator].classList.remove('not-visible');
+
 
             }, {
                 once: true
