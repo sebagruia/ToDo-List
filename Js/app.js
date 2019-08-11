@@ -93,14 +93,11 @@ const addToDoButtonAndForm = () => {
         newListLi[countButtons].addEventListener('click', (event) => {
             execute();
             const listWraper = document.querySelectorAll('.list-wraper');
-            console.log(listWraper);
             for (let i = 0; i < listWraper.length; i++) {
                     listWraper[i].classList.add('hidden')
             }
 
-            // let newIterator = countButtons-1
             listWraper[countButtons].classList.remove('hidden');
-            // newIterator = 0;
             countButtons++;
 
         }, {
@@ -116,17 +113,16 @@ const addToDoButtonAndForm = () => {
         if (inputNewListItem.value.length > 0 && event.key === "Enter") {
             pressPlusToDoListButton();
             const newListLi = document.querySelectorAll('.newListLi');
-            console.log(`newListLi number ${countButtons}`);
             newListLi[countButtons].addEventListener('click', () => {
                 execute();
                 const listWraper = document.querySelectorAll('.list-wraper');
-            console.log(listWraper);
             for (let i = 0; i < listWraper.length; i++) {
-                    listWraper[i].classList.add('not-visible')
+                    listWraper[i].classList.add('hidden')
             }
 
-            let newIterator = countButtons-1
-            listWraper[newIterator].classList.remove('not-visible');
+            listWraper[countButtons].classList.remove('hidden');
+            countButtons++;
+
 
 
             }, {
