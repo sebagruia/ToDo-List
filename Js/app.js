@@ -6,6 +6,7 @@ const myListSummary = document.querySelector('.myListSummary');
 const newListLi = document.querySelector('.newListLi')
 // let count = 0;
 let countButtons = 0;
+let iteratorForLi = 0;
 
 
 const transitions = () => {
@@ -46,7 +47,7 @@ const addToDoButtonAndForm = () => {
 
     const pressPlusToDoListButton = () => {
         const windowWidth = window.innerWidth;
-        if (inputNewListItem.value.length > 0) {
+         if (inputNewListItem.value.length > 0) {
             const newLi = document.createElement('li');
             const buttonToHide = document.getElementById('dropdownMenuButton');
             newLi.classList.add('newListLi');
@@ -82,6 +83,7 @@ const addToDoButtonAndForm = () => {
 
     const execute = () => {
         addListToUl(countButtons);
+        
     }
 
     plusButton.addEventListener('click', () => {
@@ -89,22 +91,22 @@ const addToDoButtonAndForm = () => {
         pressPlusToDoListButton();
         const newListLi = document.querySelectorAll('.newListLi');
         newListLi[countButtons].addEventListener('click', (event) => {
-            console.log(`newListLi number ${countButtons}`);
             execute();
             const listWraper = document.querySelectorAll('.list-wraper');
             console.log(listWraper);
             for (let i = 0; i < listWraper.length; i++) {
-                    listWraper[i].classList.add('not-visible')
+                    listWraper[i].classList.add('hidden')
             }
 
-            let newIterator = countButtons-1
-            listWraper[newIterator].classList.remove('not-visible');
-
+            // let newIterator = countButtons-1
+            listWraper[countButtons].classList.remove('hidden');
+            // newIterator = 0;
+            countButtons++;
 
         }, {
             once: true
         });
-
+        
 
     });
 
@@ -150,17 +152,6 @@ addToDoListButton.addEventListener('click', () => {
     if (countForms.length === 0) {
         createFormforAddingListButtons();
         addToDoButtonAndForm();
-        const getFocus = ()=>{
-            const myListSummary = document.querySelector('.myListSummary');
-            if(myListSummary.childElementCount===0){} 
-            else if(myListSummary.childElementCount>0){
-                myListSummary.lastElementChild.focus();
-
-            }  
-
-            getFocus();
-        
-    }
 
     }
 
@@ -187,7 +178,7 @@ const createListForToDoUl = () => {
 const createDivListWraper = () => {
     const listContent = document.querySelector('.list-content');
     const listWraper = document.createElement('div');
-    listWraper.classList.add('list-wraper', 'not-visible');
+    listWraper.classList.add('list-wraper');
 
     const taskForm = document.createElement('form');
     taskForm.classList.add('taskForm');
@@ -209,7 +200,7 @@ const createDivListWraper = () => {
     const todoList = document.createElement('ul');
     todoList.classList.add('todo-list');
     listWraper.insertAdjacentElement('beforeend', todoList);
-    listContent.appendChild(listWraper);
+    listContent.insertAdjacentElement('beforeend', listWraper);
 
 }
 
@@ -230,12 +221,11 @@ const addListToUl = (number) => {
    
     const newListLi = document.querySelectorAll('.newListLi');
     newListLi.item(number).addEventListener('click', (event) => {
-        console.log(`newListLi number at Second Hit ${countButtons}`);
         const listWraper = document.querySelectorAll('.list-wraper');
         for (let i = 0; i < listWraper.length; i++) {
-                listWraper[i].classList.add('not-visible')
+                listWraper.item(i).classList.add('hidden')
         }
-        listWraper.item(number).classList.remove('not-visible');
+        listWraper.item(number).classList.remove('hidden');
 
     });
 
@@ -274,17 +264,18 @@ const addListToUl = (number) => {
 
    
 
-    const insertLineInUl = () => {
-
+    const insertLineInUl = (iterator) => {
+        console.log(iterator);
+        
         const todoListHtml = createListForToDoUl();
-        todoList.item(number).insertAdjacentHTML('afterbegin', todoListHtml);
+        todoList.item(number).insertAdjacentHTML('beforeend', todoListHtml);
 
 
         const li = document.querySelectorAll('.li-item');
         const checkedIcon = document.querySelectorAll('.fa-check-circle');
         const unCheckedIcon = document.querySelectorAll('.fa-circle');
         const listText = document.querySelectorAll('.p-text');
-        listText.item(number).innerHTML = `${inputNewListEntry.item(number).value}`;
+        listText.item(iterator).innerHTML = `${inputNewListEntry.item(number).value}`;
         const deleteIcon = document.querySelectorAll('.fa-times-circle');
         const editIcon = document.querySelectorAll('.fa-edit');
 
@@ -292,13 +283,13 @@ const addListToUl = (number) => {
 
         // The function that creates the functionalitie of the check/uncheck boxes
         const checkOrUnchek = () => {
-            unCheckedIcon.item(number).classList.toggle('hidden');
-            checkedIcon.item(number).classList.toggle('hidden');
-            if (!checkedIcon.item(number).classList.contains('hidden')) {
-                listText.item(number).setAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
+            unCheckedIcon.item(iterator).classList.toggle('hidden');
+            checkedIcon.item(iterator).classList.toggle('hidden');
+            if (!checkedIcon.item(iterator).classList.contains('hidden')) {
+                listText.item(iterator).setAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
 
             } else {
-                listText.item(number).removeAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
+                listText.item(iterator).removeAttribute('style', 'text-decoration:line-through', 'text-decoration-color:#2b3f5d');
             }
         }
 
@@ -313,34 +304,31 @@ const addListToUl = (number) => {
         
 
         // Events for check/uncheck boxes
-        unCheckedIcon.item(number).addEventListener('click', checkOrUnchek);
-        checkedIcon.item(number).addEventListener('click', checkOrUnchek);
+        unCheckedIcon.item(iterator).addEventListener('click', checkOrUnchek);
+        checkedIcon.item(iterator).addEventListener('click', checkOrUnchek);
 
         modalCancelButton.addEventListener('click', () => {
-            listText.item(number).classList.remove('marked');
+            listText.item(iterator).classList.remove('marked');
         });
 
         modalSaveButton.addEventListener('click', () => {
             editText();
-            listText.item(number).classList.remove('marked');
+            listText.item(iterator).classList.remove('marked');
         });
 
         measureToDoListHeight();
-        // The function deletes the selected <li>
         const deleteList = () => {
-            li.item(number).remove();
-            if (todoList.item(number).childElementCount === 0) {
-                listWraper.item(number).setAttribute('style', 'border-width:0px');
-            }
+            li.item(iterator).classList.add('hidden');
         }
-        // Event for delete icon
-        deleteIcon.item(number).addEventListener('click', deleteList);
 
-        editIcon.item(number).addEventListener('click', () => {
-            if (listText.item(number).classList.contains('marked')) {} else {
+        // Event for delete icon
+        deleteIcon.item(iterator).addEventListener('click', deleteList);
+
+        editIcon.item(iterator).addEventListener('click', () => {
+            if (listText.item(iterator).classList.contains('marked')) {} else {
                 const modalInput = document.querySelector('.inputForModal');
-                modalInput.value = listText.item(number).innerText;
-                listText.item(number).classList.add('marked');
+                modalInput.value = listText.item(iterator).innerText;
+                listText.item(iterator).classList.add('marked');
             }
         });
 
@@ -349,23 +337,22 @@ const addListToUl = (number) => {
 
     
     inputNewListEntry.item(number).addEventListener('keypress', (event) => {
+        // let checkItemsNumberInToDoList = todoList.item(number).childElementCount;
+
         if (inputNewListEntry.item(number).value.length > 0 && event.key === "Enter") {
-            insertLineInUl();
+            insertLineInUl(iteratorForLi);
             inputNewListEntry.item(number).value = '';
+            iteratorForLi++
         }
     });
 
 
     insertButton.item(number).addEventListener('click', (event) => {
-        insertLineInUl();
+        // let checkItemsNumberInToDoList = todoList.item(number).childElementCount;
+        insertLineInUl(iteratorForLi);
         inputNewListEntry.item(number).value = '';
+        iteratorForLi++
     });
-
-    
-
-    
-    countButtons++;
-
 }
 // End Of ----- addListToUl() ------- 
 
